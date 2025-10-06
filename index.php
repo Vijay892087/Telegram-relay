@@ -4,7 +4,7 @@ include "config.php";
 // Auto-create CSV if not exists
 if(!file_exists($csv_file)){
     $f = fopen($csv_file,'w');
-    fputcsv($f, ['UPI ID','Claim','Time']);
+    fputcsv($f, ['Phone','UPI ID','Claim','Time']); // Header
     fclose($f);
 }
 
@@ -12,7 +12,7 @@ if(!file_exists($csv_file)){
 $total_claims = 0;
 if(file_exists($csv_file)){
     $data = array_map('str_getcsv', file($csv_file));
-    if(!empty($data) && $data[0][0] === 'UPI ID') $total_claims = count($data)-1;
+    if(!empty($data) && $data[0][0] === 'Phone') $total_claims = count($data)-1;
     else $total_claims = count($data);
 }
 
@@ -43,7 +43,8 @@ button:disabled{background:#7f8c8c;cursor:not-allowed;}
 
 <?php if($claim_available): ?>
 <form action="submit.php" method="post">
-<input type="text" name="upi_id" placeholder="Enter UPI ID for getting payment" required>
+<input type="text" name="phone" placeholder="Enter your phone number" required>
+<input type="text" name="upi_id" placeholder="Enter your UPI ID (e.g. xyz@bank)" required>
 <button type="submit">Get Money</button>
 </form>
 <p>Total Claims So Far: <?php echo $total_claims; ?> / <?php echo $total_claim_limit; ?></p>
