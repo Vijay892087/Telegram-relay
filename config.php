@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Kolkata');
 
 // ---------------- CLAIM SETTINGS ---------------- //
 $claim_amount = 1; // 1rs per UPI
-$total_claim_limit = 500;
+$total_claim_limit = 50;
 $csv_file = __DIR__ . "/free.csv"; // CSV storage
 
 // ---------------- TELEGRAM BOT CONFIG ---------------- //
